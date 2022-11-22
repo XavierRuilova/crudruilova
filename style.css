@@ -15,7 +15,7 @@
   grid-template-areas: 'logo nombre . .',
                        'encabezado . . .',
                        'formulario . . .',
-                       'adicionales . . .',
+                       '. adicionales adicionales .',
                        'info info info info';
                        
   
@@ -66,6 +66,7 @@ header{
   justify-content: center;
 }
 .botones{
+  
   width: 200px;
   background-color: blueviolet;
   border-color: blue;
@@ -83,6 +84,7 @@ header{
     justify-content: flex-end;
     align-items: center;
     margin: 0px;
+    order: 1;
 
 }
 .foot>div{
@@ -99,7 +101,29 @@ header{
   text-decoration: none;
   color: white;
 }
+.addElements{
+  grid-area: 'adicionales';
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* border-style: solid; */
 
+}
+
+.bars{
+  height: 200px;
+  width: 900px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  font-size:medium;
+  flex-direction: column;
+  align-items: left;
+  padding: 10px 10px 10px 10px;
+  margin: 3px;
+}
 
 /*======================MEDIA QUERIES==================================*/
 /*>>>>>>>>>>>>>>>>>>>>>RESPONSIVE MAX 1280PX <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/

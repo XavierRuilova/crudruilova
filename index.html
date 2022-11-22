@@ -24,27 +24,10 @@
         <input type="text" id="inputNombre" class="boxes" /><br />
         <label for="apellido">Apellido:</label><br />
         <input type="text" id="inputApellido" class="boxes" /><br />
-        <label for="edad">Rango de edad:</label><br />
-        <select name="edad" id="rangos" class="boxes">
-          <option value="">4-9 años</option>
-          <option value="">10-12 años</option>
-          <option value="">12-18 años</option>
-          <option value="">Adultos</option></select
-        ><br />
+        <label for="edad">Edad:</label><br />
+        <input type="number" id="inputEdad" class="boxes"><br />
         <label for="curso">Curso:</label><br />
-        <select name="curso" id="cursos" class="boxes">
-          <option value="">Aeroyoga</option>
-          <option value="">Aeroyoga kids</option>
-          <option value="">Natación</option>
-          <option value="">Senderismo</option></select
-        ><br />
-        <label for="horario">Horario:</label><br />
-        <select name="horarios" id="horarios" class="boxes">
-          <option value="">7:00 - 9:00</option>
-          <option value="">10:00 - 12:00</option>
-          <option value="">15:00 - 17:00</option>
-          <option value="">19:00 - 21:00</option></select
-        ><br />
+        <input type="text" id="inputCurso" class="boxes"><br />
         <label for="Correo">Direccion de correo:</label><br />
         <input type="email" id="inputMail" class="boxes" /><br />
         <label for="adicional">Información adicional:</label><br />
@@ -54,16 +37,18 @@
         </p>
         <textarea
           name="adicional"
-          id="txtInfoAdd"
+          id="inputInfoAdd"
           cols="50"
           rows="10"
           class="boxes"
         ></textarea
         ><br />
-        <button id="btnAgregar" class="botones boxes">Agregar</button><br />
+        <button type="button" id="btnAgregar" class="botones boxes">Agregar</button><br />
       </form>
       <!-- LISTA DE ELEMENTOS  -->
-      <section id="addElements"></section>
+      <section id="addElements">
+        
+      </section>
     </section>
 
     <!-- FOOTER -->
