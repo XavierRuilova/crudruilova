@@ -11,12 +11,13 @@
   display:grid;
   gap:20px;
   align-items: center;
-  grid-template-rows: 75px 180px auto auto auto;
-  grid-template-areas: 'logo nombre . .',
-                       'encabezado . . .',
-                       'formulario . . .',
-                       '. adicionales adicionales .',
-                       'info info info info';
+  grid-template-rows: 75px 180px auto auto auto auto;
+  grid-template-areas: 'logo nombre . . . .',
+                       'encabezado . . . . .',
+                       'formulario . . . . .',
+                       '. alert alert alert alert .',
+                       '. . adicionales adicionales . .',
+                       'info info info info info info';
                        
   
 }
@@ -75,6 +76,19 @@ header{
  cursor: pointer;
  background-color: rgb(186, 120, 248);
  
+}
+.alerta{
+  grid-area: 'alert';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height:200px;
+  background-color: gray;
+
+}
+.alertaP{
+  color: rgb(205, 33, 33);
 }
 .sectionFichas{
   grid-area: 'adicionales';
@@ -149,8 +163,8 @@ header{
 background-color: rgb(102, 7, 7);
 border-color: rgb(126, 115, 115);
 cursor: pointer;
-
 }
+
   /* ================================FOOTER================================= */
   .foot{
     background-color: black;
