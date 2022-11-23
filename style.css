@@ -66,7 +66,6 @@ header{
   justify-content: center;
 }
 .botones{
-  
   width: 200px;
   background-color: blueviolet;
   border-color: blue;
@@ -76,6 +75,81 @@ header{
  cursor: pointer;
  background-color: rgb(186, 120, 248);
  
+}
+.sectionFichas{
+  grid-area: 'adicionales';
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  /* border-style: solid; */
+
+}
+.rows{
+  display: flex;
+  min-height: 200px;
+  width: 900px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  margin: 3px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.sectDatos{
+  width: 500px;
+  min-height: 180px;
+  display: flex;
+  font-size:medium;
+  flex-direction: column;
+  align-items: left;
+  /* background-color: aquamarine; */
+}
+.sectBtns{
+  width: 200px;
+  height:50px;
+  display: flex;
+  font-size:medium;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px 10px 10px;
+  margin: 3px;
+  /* background-color: aqua; */
+  
+}
+.btnlistDimension{
+  width: 100px;
+  height:35px;
+  margin: 3px;
+  display: flex;
+  justify-content: center;
+  border-style: solid;
+  border-color: rgb(177, 202, 244);
+  border-width: 3px;
+  color: azure;
+
+}
+.btnlistEdit{
+  background-color: green;
+
+}
+.btnlistDel{
+  background-color: red;
+}
+.btnlistEdit:hover{
+  background-color: rgb(5, 85, 5);
+  border-color: rgb(126, 115, 115);
+  cursor: pointer;
+}
+.btnlistDel:hover{
+background-color: rgb(102, 7, 7);
+border-color: rgb(126, 115, 115);
+cursor: pointer;
+
 }
   /* ================================FOOTER================================= */
   .foot{
@@ -101,29 +175,9 @@ header{
   text-decoration: none;
   color: white;
 }
-.addElements{
-  grid-area: 'adicionales';
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  /* border-style: solid; */
 
-}
 
-.bars{
-  height: 200px;
-  width: 900px;
-  background-color: white;
-  border-style: solid;
-  border-width: 1px;
-  font-size:medium;
-  flex-direction: column;
-  align-items: left;
-  padding: 10px 10px 10px 10px;
-  margin: 3px;
-}
+
 
 /*======================MEDIA QUERIES==================================*/
 /*>>>>>>>>>>>>>>>>>>>>>RESPONSIVE MAX 1280PX <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/

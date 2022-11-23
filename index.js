@@ -1,47 +1,73 @@
-let inscripciones = localStorage.getItem('inscripciones')
-if(inscripciones == null){
-    inscripciones = []
+//SECCION LLAMAR CONTENIDO
+let arrayInscripciones = localStorage.getItem('inscripciones')
+if(arrayInscripciones == null){
+    arrayInscripciones = []
 }else{
-    let addel = document.createElement('div')
-    addel.classList.add('addElements')
-    inscripciones = JSON.parse(localStorage.getItem('inscripciones')) 
-    inscripciones.forEach((e) => {
-        // let addel= document.getElementById('addElements')
-        let bar = document.createElement('div')
-        bar.classList.add('bars')
-        let divNombre = document.createTextNode(`Nombre:  ${e.nombre} `)
-        let divApellido = document.createTextNode(`Apellido:  ${e.apellido} `)
-        let divEdad = document.createTextNode(`Edad:  ${e.edad} `)
-        let divCurso = document.createTextNode(`Curso:  ${e.curso} `)
-        let divMail = document.createTextNode(`Correo:  ${e.email} `)
-        let divInfo = document.createTextNode(`Información:  ${e.info} `)
-        bar.appendChild(document.createElement('h1').appendChild(divNombre))
-        bar.appendChild(document.createElement('br'))
-        bar.appendChild(divApellido)
-        bar.appendChild(document.createElement('br'))
-        bar.appendChild(divEdad)
-        bar.appendChild(document.createElement('br'))
-        bar.appendChild(divCurso)
-        bar.appendChild(document.createElement('br'))
-        bar.appendChild(divMail)
-        bar.appendChild(document.createElement('br'))
-        bar.appendChild(divInfo)
-        bar.appendChild(document.createElement('br'))
-        addel.appendChild(bar)
-        document.body.appendChild(addel)
-        
+    let sectionFichas = document.createElement('section')
+    sectionFichas.classList.add('sectionFichas')
+    arrayInscripciones = JSON.parse(localStorage.getItem('inscripciones')) 
+    arrayInscripciones.forEach((e) => {
+        let sectRow = document.createElement('section')
+        sectRow.classList.add('rows')
+        let artFicha = document.createElement('article')
+        artFicha.classList.add('sectDatos')
+        let navBtns = document.createElement('nav')
+        navBtns.classList.add('sectBtns')
+        let btnEdit = document.createElement('div')
+        btnEdit.classList.add('btnlistDimension')
+        btnEdit.classList.add('btnlistEdit')
+        let btnDel = document.createElement('div')
+        btnDel.classList.add('btnlistDimension')
+        btnDel.classList.add('btnlistDel')
+        let btnEditTxt = document.createTextNode(`Editar`) 
+        let btnDelTxt = document.createTextNode(`Eliminar`) 
+        //atributos del objeto
+        let fichaNombre = document.createTextNode(`Nombre:  ${e.nombre} `)
+        let fichaApellido = document.createTextNode(`Apellido:  ${e.apellido} `)
+        let fichaEdad = document.createTextNode(`Edad:  ${e.edad} `)
+        let fichaCurso = document.createTextNode(`Curso:  ${e.curso} `)
+        let fichaMail = document.createTextNode(`Correo:  ${e.email} `)
+        let fichaInfo = document.createTextNode(`Información:  ${e.info} `)
+        let Hnombre = document.createElement('h3')
+        let Hapellido = document.createElement('h3')
+        let Hedad = document.createElement('h3')
+        let Hcurso = document.createElement('h3')
+        let Hmail = document.createElement('h3')
+        let Hinfo = document.createElement('h3')
+
+        //fin de atributos
+        //ensamblaje de elementos
+        document.body.appendChild(sectionFichas)
+        sectionFichas.appendChild(sectRow)
+        Hnombre.appendChild(fichaNombre)
+        Hapellido.appendChild(fichaApellido)
+        Hedad.appendChild(fichaEdad)
+        Hcurso.appendChild(fichaCurso)
+        Hmail.appendChild(fichaMail)
+        Hinfo.appendChild(fichaInfo)
+        sectRow.appendChild(artFicha)
 
 
-
+        artFicha.appendChild(Hnombre)
+        artFicha.appendChild(Hapellido)
+        artFicha.appendChild(Hedad)
+        artFicha.appendChild(Hcurso)
+        artFicha.appendChild(Hmail)
+        artFicha.appendChild(Hinfo)
+        sectRow.appendChild(navBtns)
+        navBtns.appendChild(btnDel)
+        navBtns.appendChild(btnEdit)
+        btnDel.appendChild(btnDelTxt)
+        btnEdit.appendChild(btnEditTxt)
     });
 
 }
-console.log(inscripciones)
+
+//SECCION AGREGAR CONTENIDO
 let btnAgregar = document.getElementById('btnAgregar')
 
 btnAgregar.addEventListener('click', (event)=>{
-   
-    event.preventDefault()
+    // event.preventDefault()
     let txtNombre = document.getElementById('inputNombre')
     let txtApellido = document.getElementById('inputApellido')
     let txtEdad = document.getElementById('inputEdad')
@@ -49,23 +75,18 @@ btnAgregar.addEventListener('click', (event)=>{
     let txtEmail = document.getElementById('inputMail')
     let txtInfo = document.getElementById('inputInfoAdd')
     
-    inscripciones.push({
+    arrayInscripciones.push(
+        {
         nombre: txtNombre.value,
         apellido: txtApellido.value,
         edad: parseInt(txtEdad.value),
         curso: txtCurso.value,
         email: txtEmail.value,
         info: txtInfo.value, 
-    })
+    }
+    )
 
-    localStorage.setItem('inscripciones', JSON.stringify(inscripciones))
-    txtNombre.value=''
-    txtApellido.value=''
-    txtEdad.value=''
-    txtCurso.value=''
-    txtEmail.value=''
-    txtInfo.value=''
+    localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
 
 })
 
-// console.log(inscripciones)
