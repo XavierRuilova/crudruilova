@@ -16,8 +16,10 @@ if(arrayInscripciones == null){
         let btnEdit = document.createElement('div')
         btnEdit.classList.add('btnlistDimension')
         btnEdit.classList.add('btnlistEdit')
+        btnEdit.setAttribute('id','btnEdit')
         let btnDel = document.createElement('div')
         btnDel.classList.add('btnlistDimension')
+        btnDel.setAttribute('id','btnDel')
         btnDel.classList.add('btnlistDel')
         let btnEditTxt = document.createTextNode(`Editar`) 
         let btnDelTxt = document.createTextNode(`Eliminar`) 
@@ -46,8 +48,6 @@ if(arrayInscripciones == null){
         Hmail.appendChild(fichaMail)
         Hinfo.appendChild(fichaInfo)
         sectRow.appendChild(artFicha)
-
-
         artFicha.appendChild(Hnombre)
         artFicha.appendChild(Hapellido)
         artFicha.appendChild(Hedad)
@@ -55,19 +55,28 @@ if(arrayInscripciones == null){
         artFicha.appendChild(Hmail)
         artFicha.appendChild(Hinfo)
         sectRow.appendChild(navBtns)
-        navBtns.appendChild(btnDel)
         navBtns.appendChild(btnEdit)
+        navBtns.appendChild(btnDel)
         btnDel.appendChild(btnDelTxt)
         btnEdit.appendChild(btnEditTxt)
     });
 
 }
+//PARA EDITAR CONTENIDO
+// let btnEditClick = document.getElementById('btnEdit')
+// btnAgregar.addEventListener('click', (event)=>{
+
+// })
+
+// let btnDelClick = document.getElementById('btnDel')
+// btnAgregar.addEventListener('click', (event)=>{
+
+// })
 
 //SECCION AGREGAR CONTENIDO
 let btnAgregar = document.getElementById('btnAgregar')
 
 btnAgregar.addEventListener('click', (event)=>{
-    // event.preventDefault()
     let txtNombre = document.getElementById('inputNombre')
     let txtApellido = document.getElementById('inputApellido')
     let txtEdad = document.getElementById('inputEdad')
