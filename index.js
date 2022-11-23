@@ -6,7 +6,7 @@ if(arrayInscripciones == null){
     let sectionFichas = document.createElement('section')
     sectionFichas.classList.add('sectionFichas')
     arrayInscripciones = JSON.parse(localStorage.getItem('inscripciones')) 
-    arrayInscripciones.forEach((e) => {
+    for (let i = 0; i < arrayInscripciones.length; i++){
         let sectRow = document.createElement('section')
         sectRow.classList.add('rows')
         let artFicha = document.createElement('article')
@@ -16,20 +16,21 @@ if(arrayInscripciones == null){
         let btnEdit = document.createElement('div')
         btnEdit.classList.add('btnlistDimension')
         btnEdit.classList.add('btnlistEdit')
-        btnEdit.setAttribute('id','btnEdit')
+        btnEdit.setAttribute('id','btnEdit'+i)
+        // btnEdit.setAttribute('value',i)
         let btnDel = document.createElement('div')
         btnDel.classList.add('btnlistDimension')
-        btnDel.setAttribute('id','btnDel')
+        btnDel.setAttribute('id','btnDel'+i)
         btnDel.classList.add('btnlistDel')
         let btnEditTxt = document.createTextNode(`Editar`) 
         let btnDelTxt = document.createTextNode(`Eliminar`) 
         //atributos del objeto
-        let fichaNombre = document.createTextNode(`Nombre:  ${e.nombre} `)
-        let fichaApellido = document.createTextNode(`Apellido:  ${e.apellido} `)
-        let fichaEdad = document.createTextNode(`Edad:  ${e.edad} `)
-        let fichaCurso = document.createTextNode(`Curso:  ${e.curso} `)
-        let fichaMail = document.createTextNode(`Correo:  ${e.email} `)
-        let fichaInfo = document.createTextNode(`Información:  ${e.info} `)
+        let fichaNombre = document.createTextNode(`Nombre:  ${arrayInscripciones[i].nombre} `)
+        let fichaApellido = document.createTextNode(`Apellido:  ${arrayInscripciones[i].apellido} `)
+        let fichaEdad = document.createTextNode(`Edad:  ${arrayInscripciones[i].edad} `)
+        let fichaCurso = document.createTextNode(`Curso:  ${arrayInscripciones[i].curso} `)
+        let fichaMail = document.createTextNode(`Correo:  ${arrayInscripciones[i].email} `)
+        let fichaInfo = document.createTextNode(`Información:  ${arrayInscripciones[i].info} `)
         let Hnombre = document.createElement('h3')
         let Hapellido = document.createElement('h3')
         let Hedad = document.createElement('h3')
@@ -59,19 +60,26 @@ if(arrayInscripciones == null){
         navBtns.appendChild(btnDel)
         btnDel.appendChild(btnDelTxt)
         btnEdit.appendChild(btnEditTxt)
-    });
+        //PARA ELIMINAR CONTENIDO
+        let btnDelClick = document.getElementById('btnDel'+i)
+        btnDelClick.addEventListener('click', (e)=>{
+            idd = btnDelClick.id.replace('btnDel','')
+            // console.log(btnDelClick.id)
+            // console.log(idd)
+            arrayInscripciones.splice(idd,1)
+            // console.log(arrayInscripciones)
+            localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
+            location.reload()
+        })
+
+    }
 
 }
-//PARA EDITAR CONTENIDO
-// let btnEditClick = document.getElementById('btnEdit')
-// btnAgregar.addEventListener('click', (event)=>{
 
-// })
 
-// let btnDelClick = document.getElementById('btnDel')
-// btnAgregar.addEventListener('click', (event)=>{
+// console.log(arrayInscripciones)
 
-// })
+
 
 //SECCION AGREGAR CONTENIDO
 let btnAgregar = document.getElementById('btnAgregar')
@@ -98,4 +106,3 @@ btnAgregar.addEventListener('click', (event)=>{
     localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
 
 })
-
