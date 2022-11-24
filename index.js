@@ -144,6 +144,7 @@ if (btnAgregar.innerText == 'Modificar'){
     arrayInscripciones[mod].email = txtEmail.value
     arrayInscripciones[mod].info = txtInfo.value
     localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
+    // location.reload()
     }
 }
 else if (txtNombre.value != false && txtApellido.value != false && validateAge(txtEdad.value) != false && txtCurso.value != false && validateEmail(txtEmail.value) != false){
