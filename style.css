@@ -15,7 +15,7 @@
   grid-template-areas: 'logo nombre . . . .',
                        'encabezado . . . . .',
                        'formulario . . . . .',
-                       '. alert alert alert alert .',
+                       '. alert alert . . .',
                        '. . adicionales adicionales . .',
                        'info info info info info info';
                        
@@ -32,6 +32,7 @@ header{
   align-items: center;
   padding: 10px;
   padding-left: 30px;
+  order: 0;
 }
 
   #logo{
@@ -58,13 +59,15 @@ header{
   flex-direction: row;
   justify-content: center;
   vertical-align: middle;
-  margin: 30px
+  margin: 30px;
+  order:2
 
 }
 .formulario{
   grid-area: 'formulario';
   display: flex;
   justify-content: center;
+  order: 3;
 }
 .botones{
   width: 200px;
@@ -82,13 +85,17 @@ header{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height:200px;
-  background-color: gray;
+  width:63%;
+  min-height:50px;
+  order: 4;
 
 }
 .alertaP{
-  color: rgb(205, 33, 33);
+  color: rgb(255, 0, 0);
+  background-color: rgba(255, 149, 0, 0.255);
+  padding: 5px;
+  font-weight: bolder;
+
 }
 .sectionFichas{
   grid-area: 'adicionales';
@@ -97,6 +104,7 @@ header{
   flex-direction: column;
   align-items: center;
   width: 100%;
+  order: 5;
 
   /* border-style: solid; */
 
@@ -172,7 +180,7 @@ cursor: pointer;
     justify-content: flex-end;
     align-items: center;
     margin: 0px;
-    order: 1;
+    order: 6;
 
 }
 .foot>div{

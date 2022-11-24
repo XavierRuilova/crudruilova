@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Inscripciones</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   </head>
   <body class="wrapper">
     <!-- HEADER -->
@@ -21,15 +23,15 @@
     <section class="formulario">
       <form>
         <label for="nombre">Nombre:</label><br />
-        <input type="text" id="inputNombre" class="boxes" /><br />
+        <input type="text" id="inputNombre" class="boxes" required/><br />
         <label for="apellido">Apellido:</label><br />
-        <input type="text" id="inputApellido" class="boxes" /><br />
-        <label for="edad">Edad:</label><br />
-        <input type="number" id="inputEdad" class="boxes"><br />
+        <input type="text" id="inputApellido" class="boxes" required/><br />
+        <label for="edad">Edad (desde los 6 años):</label><br />
+        <input type="number" id="inputEdad" class="boxes" required><br />
         <label for="curso">Curso:</label><br />
-        <input type="text" id="inputCurso" class="boxes"><br />
+        <input type="text" id="inputCurso" class="boxes" required><br />
         <label for="Correo">Direccion de correo:</label><br />
-        <input type="email" id="inputMail" class="boxes" /><br />
+        <input type="email" id="inputMail" class="boxes" required/><br />
         <label for="adicional">Información adicional:</label><br />
         <p>
           Puede describir información adicional que el entrenador necesite saber
@@ -43,7 +45,7 @@
           class="boxes"
         ></textarea
         ><br />
-        <button value="0" id="btnAgregar" class="botones boxes">Agregar</button><br />
+        <button type="button" id="btnAgregar" class="botones boxes">Agregar</button><br />
       </form>
       <!-- LISTA DE ELEMENTOS  -->
       <!-- <section id="addElements">

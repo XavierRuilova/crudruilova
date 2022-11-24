@@ -5,17 +5,43 @@ let txtEdad = document.getElementById('inputEdad')
 let txtCurso = document.getElementById('inputCurso')
 let txtEmail = document.getElementById('inputMail')
 let txtInfo = document.getElementById('inputInfoAdd')
-let arrayInscripciones = localStorage.getItem('inscripciones')
 let btnAgregar = document.getElementById('btnAgregar')
+let artAlerta = document.createElement('article')
+artAlerta.classList.add('alerta')
+let artAlertaP = document.createElement('H3')
+artAlertaP.classList.add('alertaP')
+let artAlerta2 = document.createElement('article')
+artAlerta2.classList.add('alerta')
+let artAlerta2P = document.createElement('H3')
+artAlerta2P.classList.add('alertaP')
+let artAlertaTxt = document.createTextNode(`* Llenar los campos vacíos con información válida.`)
+let artAlerta2Txt = document.createTextNode(`* Ya existe un registro con esta información. Puede editarlo con el botón Editar.`)
+let arrayInscripciones = JSON.parse(localStorage.getItem('inscripciones'))//trae los registros
 
-//SECCION LLAMAR CONTENIDO
-if(arrayInscripciones == null){
-    arrayInscripciones = []
-}else{
+//FUNCIONES
+//validar correo
+function validateEmail(campo){      
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    if (emailRegex.test(campo)) {
+      return true
+    } else {
+      return false
+    }
+    }
+//validar edad    
+function validateAge(anios){      
+    if (anios>=6 && anios<=200) {
+      return true
+    } else {
+      return false        
+    }
+    }
+    
+//SECCION LLENAR CONTENIDO
+
     //cargar lo que tengo en la memoria y alamcenarlo en arreglo
     let sectionFichas = document.createElement('section')
     sectionFichas.classList.add('sectionFichas')
-    arrayInscripciones = JSON.parse(localStorage.getItem('inscripciones')) 
     //iteracion de los elementos en el arreglo
     for (let i = 0; i < arrayInscripciones.length; i++){
         //creacion de elementos con id y clases
@@ -73,12 +99,7 @@ if(arrayInscripciones == null){
         let btnDelClick = document.getElementById('btnDel'+i) //btnDel0,btnDel1, btnDel2, btnDel3... 
         btnDelClick.addEventListener('click', (e)=>{
             let idDel = btnDelClick.id.replace('btnDel','')//i
-            // console.log(btnDelClick.id)//i
-            // console.log(let )
             arrayInscripciones.splice(idDel ,1)
-            // console.log(arrayInscripciones)
-            // console.log(btnDelClick.id)
-            // console.log(let )
             localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
             location.reload()
             
@@ -87,67 +108,86 @@ if(arrayInscripciones == null){
 
         let btnEditClick = document.getElementById('btnEdit'+i)
         btnEditClick.addEventListener('click', (e)=>{
+            btnAgregar.setAttribute('style', 'background-color: orange')
+            btnAgregar.innerText='Modificar'
+            btnAgregar.setAttribute('value', i)
             let idEdit= btnEditClick.id.replace('btnEdit','')//i
-            // console.log(btnEditClick.id)
-            // console.log(idEdit)
-            // arrayInscripciones.splice(idEdit,1)
-            // console.log(arrayInscripciones)
             txtNombre.value = arrayInscripciones[idEdit].nombre
             txtApellido.value = arrayInscripciones[idEdit].apellido
             txtEdad.value = arrayInscripciones[idEdit].edad
             txtCurso.value = arrayInscripciones[idEdit].curso
             txtEmail.value = arrayInscripciones[idEdit].email
             txtInfo.value= arrayInscripciones[idEdit].info
-            btnAgregar.setAttribute('style', 'background-color: orange')
-            btnAgregar.innerText='Modificar'
+
+
         })
 
     }
 
+
+console.log(arrayInscripciones)
+
+
+
+//SECCION AGREGAR/MODIFICAR CONTENIDO
+
+btnAgregar.addEventListener('click', (event)=>{
+// let arrayValidar = [txtNombre.value, txtApellido.value, validateAge(txtEdad.value), txtCurso.value, validateEmail(txtEmail.value)]
+if (btnAgregar.innerText == 'Modificar'){
+    if (txtNombre.value != false && txtApellido.value != false && validateAge(txtEdad.value) != false && txtCurso.value != false && validateEmail(txtEmail.value) != false){
+
+    let mod = btnAgregar.getAttribute('value')
+    arrayInscripciones[mod].nombre = txtNombre.value
+    arrayInscripciones[mod].apellido = txtApellido.value
+    arrayInscripciones[mod].edad = Number(txtEdad.value)
+    arrayInscripciones[mod].curso = txtCurso.value
+    arrayInscripciones[mod].email = txtEmail.value
+    arrayInscripciones[mod].info = txtInfo.value
+    localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
+    }
 }
+else if (txtNombre.value != false && txtApellido.value != false && validateAge(txtEdad.value) != false && txtCurso.value != false && validateEmail(txtEmail.value) != false){
+    let filtro = arrayInscripciones.filter((e)=>{
+        return e == {
+            nombre: txtNombre.value, 
+            apellido: txtApellido.value, 
+            edad: Number(txtEdad.value), 
+            curso: txtCurso.value, 
+            email: txtEmail.value, 
+            info: txtInfo.value
 
-
-// console.log(arrayInscripciones)
-
-
-
-//SECCION AGREGAR CONTENIDO
-
-btnAgregar.addEventListener('click', (event)=>{ 
-    c = 0
-    for (let srch = 0; srch < arrayInscripciones.length; srch++){
-        if(arrayInscripciones[srch] === {nombre: txtNombre.value, apellido: txtApellido.value, edad: txtEdad.value, curso: txtCurso.value, email: txtEmail.value, info: txtInfo.value,}){
-            c+=1
         }
+    })
+    
+    console.log(filtro.length)
+
+    if(filtro.length > 0){
+        document.body.appendChild(artAlerta2)
+        artAlerta.appendChild(artAlerta2P)
+        artAlertaP.appendChild(artAlerta2Txt)
+        artAlertaP.appendChild(document.createElement('br'))
+        // event.preventDefault()
     }
-    if(c>0){
-        artAlerta = document.createElement('article')
-        artAlerta.classList.add('alerta')
-        artAlertaP = document.createElement('p')
-        artAlertaP.classList.add('alertaP')
-        artAlertaTxt = document.createTextNode(`* Registro existente o sin modificaciones`)
-        document.body.appendChild(artAlerta)
-        artAlerta.appendChild(artAlertaP)
-        artAlertaP.appendChild(artAlertaTxt)
-    }
-    else{
-        arrayInscripciones.push(
-            {
-            nombre: txtNombre.value,
-            apellido: txtApellido.value,
-            edad: parseInt(txtEdad.value),
-            curso: txtCurso.value,
-            email: txtEmail.value,
-            info: txtInfo.value, 
-            }
-        )
+    else if (filtro.length == 0){
+        arrayInscripciones.push({
+            nombre: txtNombre.value, 
+            apellido: txtApellido.value, 
+            edad: Number(txtEdad.value), 
+            curso: txtCurso.value, 
+            email: txtEmail.value, 
+            info: txtInfo.value
+        })
         localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
-
     }
 
-
-        
-
-
+} 
+else{
+        document.body.appendChild(artAlerta)
+    artAlerta.appendChild(artAlertaP)
+    artAlertaP.appendChild(artAlertaTxt)
+    artAlertaP.appendChild(document.createElement('br'))
+    event.preventDefault()}
 
 })
+
+
