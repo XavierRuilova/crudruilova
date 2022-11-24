@@ -4,7 +4,6 @@ let txtApellido = document.getElementById('inputApellido')
 let txtEdad = document.getElementById('inputEdad')
 let txtCurso = document.getElementById('inputCurso')
 let txtEmail = document.getElementById('inputMail')
-let txtInfo = document.getElementById('inputInfoAdd')
 let btnAgregar = document.getElementById('btnAgregar')
 let artAlerta = document.createElement('article')
 artAlerta.classList.add('alerta')
@@ -17,7 +16,9 @@ artAlerta2P.classList.add('alertaP')
 let artAlertaTxt = document.createTextNode(`* Llenar los campos vacíos con información válida.`)
 let artAlerta2Txt = document.createTextNode(`* Ya existe un registro con esta información. Puede editarlo con el botón Editar.`)
 let arrayInscripciones = JSON.parse(localStorage.getItem('inscripciones'))//trae los registros
-
+if (arrayInscripciones ==null){
+    arrayInscripciones =[]
+}
 //FUNCIONES
 //validar correo
 function validateEmail(campo){      
@@ -36,6 +37,23 @@ function validateAge(anios){
       return false        
     }
     }
+//Comparar objetos
+function compareObj(a, b) {
+    let aKeys = Object.keys(a).sort();
+    let bKeys = Object.keys(b).sort();
+    if (aKeys.length !== bKeys.length) {
+        return false;
+    }
+    if (aKeys.join('') !== bKeys.join('')) {
+        return false;
+    }
+    for (let i = 0; i < aKeys.length; i++) {
+        if ( a[aKeys[i]]  !== b[bKeys[i]]) {
+            return false;
+        }
+    }
+    return true;
+}
     
 //SECCION LLENAR CONTENIDO
 
@@ -67,13 +85,11 @@ function validateAge(anios){
         let fichaEdad = document.createTextNode(`Edad:  ${arrayInscripciones[i].edad} `)
         let fichaCurso = document.createTextNode(`Curso:  ${arrayInscripciones[i].curso} `)
         let fichaMail = document.createTextNode(`Correo:  ${arrayInscripciones[i].email} `)
-        let fichaInfo = document.createTextNode(`Información:  ${arrayInscripciones[i].info} `)
         let Hnombre = document.createElement('h3')
         let Hapellido = document.createElement('h3')
         let Hedad = document.createElement('h3')
         let Hcurso = document.createElement('h3')
         let Hmail = document.createElement('h3')
-        let Hinfo = document.createElement('h3')
         //ensamblaje de elementos
         document.body.appendChild(sectionFichas)//agrego al body la sectionFichas contiene todas las filas de la seccion 
         sectionFichas.appendChild(sectRow)//agrego la sectionFichas las filas creadas que tienen fondo blanco
@@ -82,14 +98,12 @@ function validateAge(anios){
         Hedad.appendChild(fichaEdad)//agrego al h3 creado la variable que contiene el texto para ese h3
         Hcurso.appendChild(fichaCurso)//agrego al h3 creado la variable que contiene el texto para ese h3
         Hmail.appendChild(fichaMail)//agrego al h3 creado la variable que contiene el texto para ese h3
-        Hinfo.appendChild(fichaInfo)//agrego al h3 creado la variable que contiene el texto para ese h3
         sectRow.appendChild(artFicha)//Agrego a la franja blanca la seccion que contiene todos los h3
         artFicha.appendChild(Hnombre)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
         artFicha.appendChild(Hapellido)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
         artFicha.appendChild(Hedad)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
         artFicha.appendChild(Hcurso)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
         artFicha.appendChild(Hmail)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
-        artFicha.appendChild(Hinfo)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
         sectRow.appendChild(navBtns)//en la franja blanca arrwgo la secion del nvegador donde van lso botones
         navBtns.appendChild(btnEdit)//en el navegador donde van los botones agrego los botones que se crearon con div. Caso editar
         navBtns.appendChild(btnDel)//En el navegador donde van los botones agrego los botones que se crearon con div. caso de eliminar
@@ -117,77 +131,61 @@ function validateAge(anios){
             txtEdad.value = arrayInscripciones[idEdit].edad
             txtCurso.value = arrayInscripciones[idEdit].curso
             txtEmail.value = arrayInscripciones[idEdit].email
-            txtInfo.value= arrayInscripciones[idEdit].info
-
-
         })
 
     }
-
-
-console.log(arrayInscripciones)
-
 
 
 //SECCION AGREGAR/MODIFICAR CONTENIDO
 
 btnAgregar.addEventListener('click', (event)=>{
-// let arrayValidar = [txtNombre.value, txtApellido.value, validateAge(txtEdad.value), txtCurso.value, validateEmail(txtEmail.value)]
-if (btnAgregar.innerText == 'Modificar'){
-    if (txtNombre.value != false && txtApellido.value != false && validateAge(txtEdad.value) != false && txtCurso.value != false && validateEmail(txtEmail.value) != false){
+    if (btnAgregar.innerText == 'Modificar'){
+        if (txtNombre.value != false && txtApellido.value != false && validateAge(txtEdad.value) != false && txtCurso.value != false && validateEmail(txtEmail.value) != false){
 
-    let mod = btnAgregar.getAttribute('value')
-    arrayInscripciones[mod].nombre = txtNombre.value
-    arrayInscripciones[mod].apellido = txtApellido.value
-    arrayInscripciones[mod].edad = Number(txtEdad.value)
-    arrayInscripciones[mod].curso = txtCurso.value
-    arrayInscripciones[mod].email = txtEmail.value
-    arrayInscripciones[mod].info = txtInfo.value
-    localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
-    // location.reload()
+            let mod = btnAgregar.getAttribute('value')
+            arrayInscripciones[mod].nombre = txtNombre.value
+            arrayInscripciones[mod].apellido = txtApellido.value
+            arrayInscripciones[mod].edad = parseInt(txtEdad.value)
+            arrayInscripciones[mod].curso = txtCurso.value
+            arrayInscripciones[mod].email = txtEmail.value
+            localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
     }
 }
 else if (txtNombre.value != false && txtApellido.value != false && validateAge(txtEdad.value) != false && txtCurso.value != false && validateEmail(txtEmail.value) != false){
-    let filtro = arrayInscripciones.filter((e)=>{
-        return e == {
-            nombre: txtNombre.value, 
-            apellido: txtApellido.value, 
-            edad: Number(txtEdad.value), 
-            curso: txtCurso.value, 
-            email: txtEmail.value, 
-            info: txtInfo.value
-
-        }
-    })
-    
-    console.log(filtro.length)
-
-    if(filtro.length > 0){
-        document.body.appendChild(artAlerta2)
-        artAlerta.appendChild(artAlerta2P)
-        artAlertaP.appendChild(artAlerta2Txt)
-        artAlertaP.appendChild(document.createElement('br'))
-        // event.preventDefault()
+   let exist = {
+        nombre: String(txtNombre.value), 
+        apellido: String(txtApellido.value), 
+        edad: Number(txtEdad.value), 
+        curso: String(txtCurso.value), 
+        email: String(txtEmail.value),
     }
-    else if (filtro.length == 0){
-        arrayInscripciones.push({
-            nombre: txtNombre.value, 
-            apellido: txtApellido.value, 
-            edad: Number(txtEdad.value), 
-            curso: txtCurso.value, 
-            email: txtEmail.value, 
-            info: txtInfo.value
-        })
+    
+    let cont =0
+    for (let i1=0; i1 < arrayInscripciones.length; i1++){
+        if (compareObj(exist, arrayInscripciones[i1])==true){
+            cont +=1
+        }
+    }
+    if(cont>0){
+        document.body.appendChild(artAlerta2)
+        artAlerta2.appendChild(artAlerta2P)
+        artAlerta2P.appendChild(artAlerta2Txt)
+        // artAlerta2P.appendChild(document.createElement('br'))
+        event.preventDefault()
+    }
+    else{
+        arrayInscripciones.push(exist)
         localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
     }
 
 } 
 else{
-        document.body.appendChild(artAlerta)
+    document.body.appendChild(artAlerta)
     artAlerta.appendChild(artAlertaP)
     artAlertaP.appendChild(artAlertaTxt)
-    artAlertaP.appendChild(document.createElement('br'))
-    event.preventDefault()}
+    // artAlertaP.appendChild(document.createElement('br'))
+    event.preventDefault()
+}
 
 })
 
