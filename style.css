@@ -3,12 +3,14 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: medium;
   line-height: 30px;
+  font-size: 15px;
+
 }
 .wrapper{
   display:grid;
   gap:20px;
+  font-size: medium;
   align-items: center;
   grid-template-rows: 75px 180px auto auto auto auto;
   grid-template-areas: 'logo nombre . . . .',
@@ -16,39 +18,31 @@
                        'formulario . . . . .',
                        '. alert alert . . .',
                        '. . adicionales adicionales . .',
-                       'info info info info info info';
-                       
-  
+                       'info info info info info info'; 
 }
 body {
   background-color: antiquewhite;
 }
-
 header{
   display: flex;
-  background-color: black;
   flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px;
   padding-left: 30px;
+  background-color: black;
   order: 0;
-}
 
+}
   #logo{
     grid-area: 'logo';
     max-width:50px ;
-    max-height: 50px;
-
-  
+    max-height: 50px;  
   }
   h1{
     grid-area: 'nombre';
     color: white;
     padding-left: 20px;
-  }
-
-  .boxes{
-    border-radius: 10px;
   }
 .inscripciones{
   grid-area: 'encabezado';
@@ -60,13 +54,18 @@ header{
   vertical-align: middle;
   margin: 30px;
   order:2
-
 }
 .formulario{
   grid-area: 'formulario';
   display: flex;
   justify-content: center;
+  align-items: center;
   order: 3;
+  /* background-color: rgb(12, 140, 140); */
+}
+.boxes{
+  border-radius: 10px;
+  width: 200%;
 }
 .botones{
   width: 200px;
@@ -82,19 +81,19 @@ header{
 .alerta{
   grid-area: 'alert';
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width:63%;
+  width:73%;
   min-height:50px;
   order: 4;
-
+  /* background-color: aqua; */
 }
 .alertaP{
   color: rgb(255, 0, 0);
   background-color: rgba(255, 149, 0, 0.255);
   padding: 5px;
   font-weight: bolder;
-
 }
 .sectionFichas{
   grid-area: 'adicionales';
@@ -104,59 +103,55 @@ header{
   align-items: center;
   width: 100%;
   order: 5;
-
-  /* border-style: solid; */
-
+    /* background-color: aqua; */
 }
 .rows{
   display: flex;
-  min-height: 200px;
-  width: 900px;
-  background-color: white;
-  border-style: solid;
-  border-width: 1px;
-  margin: 3px;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  margin: 3px;
+  min-height: 200px;
+  width: 900px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: white;
 }
 .sectDatos{
+  display: flex;
   width: 500px;
   min-height: 180px;
-  display: flex;
-  font-size:medium;
   flex-direction: column;
   align-items: left;
+  justify-content: center;
   /* background-color: aquamarine; */
 }
 .sectBtns{
-  width: 200px;
-  height:50px;
   display: flex;
-  font-size:medium;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 200px;
+  height:50px;
   padding: 10px 10px 10px 10px;
   margin: 3px;
-  /* background-color: aqua; */
-  
+  /* background-color: rgb(29, 82, 82); */
 }
 .btnlistDimension{
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
   width: 100px;
   height:35px;
   margin: 3px;
-  display: flex;
-  justify-content: center;
   border-style: solid;
-  border-color: rgb(177, 202, 244);
   border-width: 3px;
+  border-color: rgb(177, 202, 244);
   color: azure;
-
 }
 .btnlistEdit{
   background-color: green;
-
 }
 .btnlistDel{
   background-color: red;
@@ -174,44 +169,178 @@ cursor: pointer;
 
   /* ================================FOOTER================================= */
   .foot{
-    background-color: black;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 0px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    padding-top: 50px;
+    padding-left: 10px;
+    background-color: black;
     order: 6;
-
 }
 .foot>div{
   grid-area: 'info';
   display: flex;
-  color: white;
   flex-direction: column;
-  margin: 100px;
-  padding: 32px;
-  
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 200px;
+  margin-left: 100px;
+  padding: 1px;
+  line-height: 1px;
+  color: white;
+  /* background-color: rgb(10, 34, 154); */
 }
 .footlinks>a{
-  margin: 10px;
+  /* padding: 15%; */
+  line-height: 32px;
   text-decoration: none;
   color: white;
+  /* background-color: aqua; */
 }
-
-
-
 
 /*======================MEDIA QUERIES==================================*/
 /*>>>>>>>>>>>>>>>>>>>>>RESPONSIVE MAX 1280PX <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 @media screen and (max-width:640px) {
 
+  /* WRAPPER */
+  .wrapper{
+    grid-template-rows: 63px 10px auto auto auto auto;
+  }
+  /* INSCRIPCIONES */
+  .inscripciones{
+    font-size: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin: 30px;
+    order:2
+  }
+  /* FORMULARIO */
+  .formulario{
+    justify-content: left;
+    margin-left: 30px;
+    order: 3;
+  }
+  /* BOTONES */
+  .botones{
+    width: 200%;
+  }
+/* SECCION ALERTAS */
+.alerta{
+  justify-content: left;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width:100%;
 }
+/* SECCION DE REGISTROS */
+.sectionFichas{
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 5px;
+}
+.rows{
+  min-height: 100px;
+  width: 99%;
+  margin: 3px;
+  justify-content: left;
+}
+.sectDatos{
+  width: 80%;
+  min-height: 180px;
+  margin-left: 15px;
+}
+.sectBtns{
+  min-width: 50px;
+  min-height:100px;
+  flex-direction: column;
+}
+  /* FOOTER */
+  .foot{
+    min-height: 109%;
+    flex-direction: column;
+}
+.foot>div{
+  min-width: 30px;
+  height: 120px;
+  margin: 3px;
+  padding: 5px;
+}
+.footlinks>a{
+  margin: 10px;
+  line-height: 1px;
+  font-size: smaller;
+}
+}
+
 
 /*>>>>>>>>>>>>>>>>>>>>>RESPONSIVE 640PX A 1280PX<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 @media screen and (min-width:640px) and (max-width:1280px) {
+  * {
+    font-size: 15px;
+    line-height: 30px;
+  }
+  /* WRAPPER */
+  .wrapper{
+    grid-template-rows: 63px 80px auto auto auto auto;
+  }
+  .boxes{
+    width: 500px;
+  }
+  /* INSCRIPCIONES */
+  .inscripciones{
+    font-size: 60px;
+  }
 
+  /* BOTONES */
+  .botones{
+    width: 50%;
+  }
+/* SECCION ALERTAS */
+.alerta{
+  width:100%;
+}
+/* SECCION DE REGISTROS */
+.sectionFichas{
+  justify-content: flex-start;
+  align-items: center;
+}
+.rows{
+  width: 65%;
+  justify-content:space-between;
+}
+.sectDatos{
+  width: 80%;
+  min-height: 180px;
+  margin-left: 80px;
+}
+.sectBtns{
+  min-width: 50px;
+  min-height:100px;
+  flex-direction: column;
+  align-items: center;
+}
+.foot{
+  height: 120%;
+  width: 100%;
+  padding-top: 10px;
+}
+.foot>div{
+  margin-left: 30px;
+  padding: 32px;
+  height: 85%;
+  width:25%
+}
+.footlinks>a{
+  font-size: smaller;
+  line-height: 20px;
+}
 }
 /*>>>>>>>>>>>>>>>>>>>>>RESPONSIVE FROM 1280PX <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
 @media screen and (min-width:1280px) {
-  
+
 }
