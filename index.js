@@ -5,16 +5,6 @@ let txtEdad = document.getElementById('inputEdad')
 let txtCurso = document.getElementById('inputCurso')
 let txtEmail = document.getElementById('inputMail')
 let btnAgregar = document.getElementById('btnAgregar')
-let artAlerta = document.createElement('article')
-artAlerta.classList.add('alerta')
-let artAlertaP = document.createElement('H3')
-artAlertaP.classList.add('alertaP')
-let artAlerta2 = document.createElement('article')
-artAlerta2.classList.add('alerta')
-let artAlerta2P = document.createElement('H3')
-artAlerta2P.classList.add('alertaP')
-let artAlertaTxt = document.createTextNode(`* Llenar los campos vacíos con información válida.`)
-let artAlerta2Txt = document.createTextNode(`* Ya existe un registro con esta información. Puede editarlo con el botón Editar.`)
 let arrayInscripciones = JSON.parse(localStorage.getItem('inscripciones'))//trae los registros
 if (arrayInscripciones ==null){
     arrayInscripciones =[]
@@ -59,7 +49,37 @@ function compareObj(a, b) {
 function ensamble2tags(tag1, tag2){
     tag1.appendChild(tag2)
 }
-    
+//funcion alertas
+function alerta(tipo){
+    let artAlerta = document.createElement('article')
+    artAlerta.classList.add('alerta')
+    let artAlertaP = document.createElement('H3')
+    artAlertaP.classList.add('alertaP')
+    let artAlertaTxt =''
+if(tipo==1){
+    artAlertaTxt = document.createTextNode(`* Llenar los campos vacíos con información válida.`)
+    document.body.appendChild(artAlerta)
+    ensamble2tags(artAlerta, artAlertaP)
+    ensamble2tags(artAlertaP, artAlertaTxt)
+    btnAgregar.setAttribute('type', 'button')
+    btnAgregar.addEventListener('click', (e)=>{
+        btnAgregar.setAttribute('type', 'submit')
+        location.reload()
+    })
+}
+else if(tipo==2){
+    artAlertaTxt = document.createTextNode(`* Ya existe un registro con esta información. Puede editarlo con el botón Editar.`)
+    document.body.appendChild(artAlerta)
+    ensamble2tags(artAlerta, artAlertaP)
+    ensamble2tags(artAlertaP, artAlertaTxt)
+    btnAgregar.setAttribute('type', 'button')
+    btnAgregar.addEventListener('click', (e)=>{
+        btnAgregar.setAttribute('type', 'submit')
+        location.reload()
+    })
+}
+}
+
 //SECCION LLENAR CONTENIDO
 
     //cargar lo que tengo en la memoria y alamcenarlo en arreglo
@@ -123,7 +143,6 @@ function ensamble2tags(tag1, tag2){
             arrayInscripciones.splice(idDel ,1)
             localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
             location.reload()
-            
         })
         //creacion de accion de boton EDITAR
         let btnEditClick = document.getElementById('btnEdit'+i)
@@ -139,58 +158,48 @@ function ensamble2tags(tag1, tag2){
             txtCurso.value = arrayInscripciones[idEdit].curso
             txtEmail.value = arrayInscripciones[idEdit].email
         })
-
     }
-
 
 //SECCION AGREGAR/MODIFICAR CONTENIDO
 
 btnAgregar.addEventListener('click', (event)=>{
-    if (btnAgregar.innerText == 'Modificar'){
-        if (txtNombre.value != false && txtApellido.value != false && validateAge(txtEdad.value) != false && txtCurso.value != false && validateEmail(txtEmail.value) != false){
 
+    if (txtNombre.value != false && txtApellido.value != false && validateAge(txtEdad.value) != false && txtCurso.value != false && validateEmail(txtEmail.value) != false){
+        if (btnAgregar.innerText == 'Modificar'){
             let mod = btnAgregar.getAttribute('value')
-            arrayInscripciones[mod].nombre = txtNombre.value
-            arrayInscripciones[mod].apellido = txtApellido.value
-            arrayInscripciones[mod].edad = parseInt(txtEdad.value)
-            arrayInscripciones[mod].curso = txtCurso.value
-            arrayInscripciones[mod].email = txtEmail.value
-            localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
-    }
-}
-else if (txtNombre.value != false && txtApellido.value != false && validateAge(txtEdad.value) != false && txtCurso.value != false && validateEmail(txtEmail.value) != false){
-   let exist = {
-        nombre: String(txtNombre.value), 
-        apellido: String(txtApellido.value), 
-        edad: Number(txtEdad.value), 
-        curso: String(txtCurso.value), 
-        email: String(txtEmail.value),
-    }
-    
-    let cont =0
-    for (let i1=0; i1 < arrayInscripciones.length; i1++){
-        if (compareObj(exist, arrayInscripciones[i1])==true){
-            cont +=1
+                arrayInscripciones[mod].nombre = txtNombre.value
+                arrayInscripciones[mod].apellido = txtApellido.value
+                arrayInscripciones[mod].edad = parseInt(txtEdad.value)
+                arrayInscripciones[mod].curso = txtCurso.value
+                arrayInscripciones[mod].email = txtEmail.value
+                localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
+        }
+        else{
+            let exist = {
+                nombre: String(txtNombre.value), 
+                apellido: String(txtApellido.value), 
+                edad: Number(txtEdad.value), 
+                curso: String(txtCurso.value), 
+                email: String(txtEmail.value),
+            }
+            let cont =0
+            for (let i1=0; i1 < arrayInscripciones.length; i1++){
+                if (compareObj(exist, arrayInscripciones[i1])==true){
+                    cont +=1
+                }
+            }
+            if(cont>0){
+                alerta(2)
+            }
+            else{
+                arrayInscripciones.push(exist)
+                localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
+            }
         }
     }
-    if(cont>0){
-        document.body.appendChild(artAlerta2)
-        ensamble2tags(artAlerta2, artAlerta2P)
-        ensamble2tags(artAlerta2P, artAlerta2Txt)
-        event.preventDefault()
-    }
     else{
-        arrayInscripciones.push(exist)
-        localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
+        alerta(1)
     }
-} 
-else{
-    document.body.appendChild(artAlerta)
-    ensamble2tags(artAlerta, artAlertaP)
-    ensamble2tags(artAlertaP, artAlertaTxt)
-    event.preventDefault()
-}
-
 })
 
 
