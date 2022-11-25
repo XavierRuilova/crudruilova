@@ -204,7 +204,7 @@ cursor: pointer;
 
 /*======================MEDIA QUERIES==================================*/
 /*>>>>>>>>>>>>>>>>>>>>>RESPONSIVE MAX 1280PX <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-@media screen and (max-width:640px) {
+@media screen and (max-width:750px) {
 
   /* WRAPPER */
   .wrapper{
@@ -281,7 +281,7 @@ cursor: pointer;
 
 
 /*>>>>>>>>>>>>>>>>>>>>>RESPONSIVE 640PX A 1280PX<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-@media screen and (min-width:640px) and (max-width:1280px) {
+@media screen and (min-width:750px) and (max-width:1280px) {
   * {
     font-size: 15px;
     line-height: 30px;
