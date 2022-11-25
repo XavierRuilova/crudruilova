@@ -128,8 +128,9 @@ function ensamble2tags(tag1, tag2){
         //creacion de accion de boton EDITAR
         let btnEditClick = document.getElementById('btnEdit'+i)
         btnEditClick.addEventListener('click', (e)=>{
-            btnAgregar.setAttribute('style', 'background-color: orange')
+            // btnAgregar.setAttribute('style', 'background-color: orange')
             btnAgregar.innerText='Modificar'
+            btnAgregar.classList.add('btnModificar')
             btnAgregar.setAttribute('value', i)
             let idEdit= btnEditClick.id.replace('btnEdit','')//i
             txtNombre.value = arrayInscripciones[idEdit].nombre
