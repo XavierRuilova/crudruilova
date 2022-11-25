@@ -54,6 +54,11 @@ function compareObj(a, b) {
     }
     return true;
 }
+
+//funcion ensamblar 2 tags
+function ensamble2tags(tag1, tag2){
+    tag1.appendChild(tag2)
+}
     
 //SECCION LLENAR CONTENIDO
 
@@ -91,24 +96,26 @@ function compareObj(a, b) {
         let Hcurso = document.createElement('h3')
         let Hmail = document.createElement('h3')
         //ensamblaje de elementos
-        document.body.appendChild(sectionFichas)//agrego al body la sectionFichas contiene todas las filas de la seccion 
-        sectionFichas.appendChild(sectRow)//agrego la sectionFichas las filas creadas que tienen fondo blanco
-        Hnombre.appendChild(fichaNombre)//agrego al h3 creado la variable que contiene el texto para ese h3
-        Hapellido.appendChild(fichaApellido)//agrego al h3 creado la variable que contiene el texto para ese h3
-        Hedad.appendChild(fichaEdad)//agrego al h3 creado la variable que contiene el texto para ese h3
-        Hcurso.appendChild(fichaCurso)//agrego al h3 creado la variable que contiene el texto para ese h3
-        Hmail.appendChild(fichaMail)//agrego al h3 creado la variable que contiene el texto para ese h3
-        sectRow.appendChild(artFicha)//Agrego a la franja blanca la seccion que contiene todos los h3
-        artFicha.appendChild(Hnombre)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
-        artFicha.appendChild(Hapellido)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
-        artFicha.appendChild(Hedad)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
-        artFicha.appendChild(Hcurso)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
-        artFicha.appendChild(Hmail)//en la seccion q debe contener todos h3 agrego los h3 que ya tienen su texto
-        sectRow.appendChild(navBtns)//en la franja blanca arrwgo la secion del nvegador donde van lso botones
-        navBtns.appendChild(btnEdit)//en el navegador donde van los botones agrego los botones que se crearon con div. Caso editar
-        navBtns.appendChild(btnDel)//En el navegador donde van los botones agrego los botones que se crearon con div. caso de eliminar
-        btnDel.appendChild(btnDelTxt)//Agrego el texto al boton eliminar
-        btnEdit.appendChild(btnEditTxt)//Agrego el texto al boton Editar
+        document.body.appendChild(sectionFichas)
+        ensamble2tags(sectionFichas, sectRow)
+        ensamble2tags(sectRow, artFicha)
+        let arrayH =[Hnombre, Hapellido, Hedad, Hcurso, Hmail]
+        let arrayT =[fichaNombre, fichaApellido, fichaEdad, fichaCurso, fichaMail]
+        for (let d=0; d<arrayH.length;d++){
+            ensamble2tags(artFicha, arrayH[d])
+        }
+        for (let h=0; h<arrayH.length;h++){
+            ensamble2tags(arrayH[h], arrayT[h])
+        }
+       let arraybtn =[btnEdit, btnDel]
+       let arraybtnT = [btnEditTxt, btnDelTxt]
+        ensamble2tags(sectRow, navBtns)
+        for (let n=0; n<arraybtn.length;n++){
+            ensamble2tags(navBtns, arraybtn[n])
+        }
+        for (let bt=0; bt<arraybtn.length;bt++){
+            ensamble2tags(arraybtn[bt], arraybtnT[bt])
+        }
         //creacion de accion de boton ELIMINAR
         let btnDelClick = document.getElementById('btnDel'+i) //btnDel0,btnDel1, btnDel2, btnDel3... 
         btnDelClick.addEventListener('click', (e)=>{
@@ -167,20 +174,19 @@ else if (txtNombre.value != false && txtApellido.value != false && validateAge(t
     }
     if(cont>0){
         document.body.appendChild(artAlerta2)
-        artAlerta2.appendChild(artAlerta2P)
-        artAlerta2P.appendChild(artAlerta2Txt)
+        ensamble2tags(artAlerta2, artAlerta2P)
+        ensamble2tags(artAlerta2P, artAlerta2Txt)
         event.preventDefault()
     }
     else{
         arrayInscripciones.push(exist)
         localStorage.setItem('inscripciones', JSON.stringify(arrayInscripciones))
     }
-
 } 
 else{
     document.body.appendChild(artAlerta)
-    artAlerta.appendChild(artAlertaP)
-    artAlertaP.appendChild(artAlertaTxt)
+    ensamble2tags(artAlerta, artAlertaP)
+    ensamble2tags(artAlertaP, artAlertaTxt)
     event.preventDefault()
 }
 
