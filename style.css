@@ -102,6 +102,7 @@ header{
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding-bottom: 60px;
   order: 5;
     /* background-color: aqua; */
 }
@@ -260,18 +261,20 @@ cursor: pointer;
 }
   /* FOOTER */
   .foot{
-    min-height: 109%;
-    flex-direction: column;
+    min-height: 180%;/*109*/
+    flex-direction: row;
+
 }
 .foot>div{
   min-width: 30px;
   height: 120px;
   margin: 3px;
-  padding: 5px;
+  margin-left: 12px;
+  padding: 8px;
 }
 .footlinks>a{
   margin: 10px;
-  line-height: 1px;
+  line-height: 20px;
   font-size: smaller;
 }
 }

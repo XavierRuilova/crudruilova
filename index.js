@@ -119,7 +119,6 @@ function compareObj(a, b) {
             
         })
         //creacion de accion de boton EDITAR
-
         let btnEditClick = document.getElementById('btnEdit'+i)
         btnEditClick.addEventListener('click', (e)=>{
             btnAgregar.setAttribute('style', 'background-color: orange')
@@ -170,7 +169,6 @@ else if (txtNombre.value != false && txtApellido.value != false && validateAge(t
         document.body.appendChild(artAlerta2)
         artAlerta2.appendChild(artAlerta2P)
         artAlerta2P.appendChild(artAlerta2Txt)
-        // artAlerta2P.appendChild(document.createElement('br'))
         event.preventDefault()
     }
     else{
@@ -183,7 +181,6 @@ else{
     document.body.appendChild(artAlerta)
     artAlerta.appendChild(artAlertaP)
     artAlertaP.appendChild(artAlertaTxt)
-    // artAlertaP.appendChild(document.createElement('br'))
     event.preventDefault()
 }
 
